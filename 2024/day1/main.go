@@ -43,13 +43,10 @@ func part1(left []int, right []int, size int) int {
 }
 
 func part2(left []int, right []int, size int) int {
-	var lmap map[int]int
-	lmap = make(map[int]int)
 	var rmap map[int]int
 	rmap = make(map[int]int)
 	for i := 0; i < size; i++ {
-		lmap[left[i]] += 1
-		rmap[right[i]] += 1
+		rmap[right[i]]++
 	}
 	var result = 0
 	for i := 0; i < size; i++ {
