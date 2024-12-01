@@ -70,7 +70,7 @@ func main() {
 	right := make([]int, size)
 
 	for index, line := range lines {
-		dupa := strings.Split(line, "   ")
+		dupa := strings.Fields(line)
 		left[index], err = strconv.Atoi(dupa[0])
 		right[index], err = strconv.Atoi(dupa[1])
 	}
