@@ -60,11 +60,39 @@ func isSafe(array []int) int {
 	return 1
 }
 
+func removeIndex(array []int, index int) []int {
+	arr := make([]int, 0)
+	arr = append(arr, array[:index]...)
+	arr = append(arr, array[index+1:]...)
+	return arr
+}
+
+func isSafeTolerate(array []int) int {
+	if isSafe(array) == 1 {
+		return 1
+	}
+	for i := 0; i < len(array); i++ {
+		if isSafe(removeIndex(array, i)) == 1 {
+			return 1
+		}
+	}
+	return 0
+}
+
 func part1(lines []string) int {
 	var totalSafe = 0
 	for _, line := range lines {
 		dupa := intArray(strings.Fields(line))
 		totalSafe += isSafe(dupa)
+	}
+	return totalSafe
+}
+
+func part2(lines []string) int {
+	var totalSafe = 0
+	for _, line := range lines {
+		dupa := intArray(strings.Fields(line))
+		totalSafe += isSafeTolerate(dupa)
 	}
 	return totalSafe
 }
@@ -76,5 +104,6 @@ func main() {
 	fmt.Println(len(lines))
 
 	println(part1(lines))
+	println(part2(lines))
 
 }
