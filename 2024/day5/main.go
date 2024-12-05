@@ -60,6 +60,7 @@ func main() {
 
 	var i = 0
 	var sum = 0
+	var fixed = 0
 
 	for index, line := range lines {
 		dupa := strings.Split(line, "|")
@@ -83,9 +84,20 @@ func main() {
 		}
 
 		var num = check(orderRules, numbers)
+		if num == 0 {
+			slices.SortFunc(numbers,
+				func(a, b int) int {
+					if slices.Contains(orderRules[a], b) {
+						return -1
+					}
+					return 1
+				})
+			fixed += check(orderRules, numbers)
+		}
 
 		sum += num
 	}
 	fmt.Println(sum)
+	fmt.Println(fixed)
 
 }
